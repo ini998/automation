@@ -1,0 +1,20 @@
+*** Settings ***
+Library     Selenium2Library
+Suite Setup     Go to homepage
+Suite Teardown  Close All Browsers
+*** Variables ***
+${BROWSER}  firefox
+${LINK}    css:p.h4:first-child a
+*** Test Cases ***
+Search iPhone 7 open first link
+    Search and open first URL   iPhone 7
+*** Keywords ***
+Search and open first URL
+    [Arguments]    ${searchkey}
+    Input Text     id=searchbox    ${searchkey}
+    Click Button   id=doSearch
+    Wait Until Page Contains Element    ${LINK}
+    Click Element   ${LINK}
+
+Go to homepage
+    Open Browser    https://hotline.ua    ${BROWSER}
